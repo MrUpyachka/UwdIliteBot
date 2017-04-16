@@ -24,7 +24,7 @@ def handle_start_help(message):
 		data = urllib.urlopen('http://api.oboobs.ru/noise/1/').read()
 		obj = json.loads(data)
 		for img in obj:
-			bot.send_message(message.chat.id, 'http://media.oboobs.ru/'+img['preview'])
+			bot.send_message(message.chat.id, 'http://media.oboobs.ru/noise/' + str(img['id']) + '.jpg')
 	except Exception:
 		bot.send_message(message.chat.id, 'Что то пошло не так...')
 
