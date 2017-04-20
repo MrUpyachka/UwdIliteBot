@@ -4,12 +4,31 @@ import telebot
 import random
 import urllib
 import json
+import threading
+import time
+
+counter = 0
+hour = 60 * 60
+
+def worker():
+	while True:
+		counter = 0
+		time.sleep(hour)
+
+def canSend():
+	if counter <= 20:
+		return True
+	return False
+
+thread = threading.Thread(target=worker)
+thread.start()
 
 bot = telebot.TeleBot("119720842:AAG__-LvMk0r0TACTRypwn_Te8OTprKa8SI")
 
 keks = ['кек', 'кпек', 'КЕК', 'Кек', 'кееееееК', 'лол кек чебурек', 'ишак тебя метил', 'КПЕК']
 ornul = ['как мразь', 'как тварь', 'как пидор', 'как шлеха', 'как алеша попович', 'как стерва']
 reply = ['Вот ты мышь...', 'Уйди лофтер!', 'Ты надоел уже', 'Шо, дизайнер шоли?', 'Обкекался мразь', 'Тоби пизда', 'Вали пидор', 'Соси писос', 'Член не дорос кукарекать']
+telki = ['Слишком много телок', 'Попробуй позже', 'Я отказываюсь выполнять твои команды']
 
 @bot.message_handler(commands=['kek'])
 def handle_start_help(message):
@@ -21,13 +40,19 @@ def handle_start_help(message):
 
 @bot.message_handler(commands=['telki'])
 def handle_start_help(message):
-	try:
-		data = urllib.urlopen('http://api.oboobs.ru/noise/1/').read()
-		obj = json.loads(data)
-		for img in obj:
-			bot.send_message(message.chat.id, 'http://media.oboobs.ru/noise/' + str(img['id']) + '.jpg')
-	except Exception:
-		bot.send_message(message.chat.id, 'Что то пошло не так...')
+	global counter
+	if canSend():
+		try:
+			data = urllib.urlopen('http://api.oboobs.ru/noise/1/').read()
+			obj = json.loads(data)
+			counter += 1
+			for img in obj:
+				bot.send_message(message.chat.id, 'http://media.oboobs.ru/noise/' + str(img['id']) + '.jpg')
+		except Exception:
+			bot.send_message(message.chat.id, 'Что то пошло не так...')
+	else:
+		bot.send_message(message.chat.id, telki[random.randint(0, 2)])
+
 
 @bot.message_handler(content_types=["text"])
 def repeat_all_messages(message):
