@@ -31,7 +31,8 @@ reply = ['Вот ты мышь...', 'Уйди лофтер!', 'Ты надоел
 telki = ['Слишком много телок', 'Попробуй позже', 'Я отказываюсь выполнять твои команды']
 error = ['Телок дудосят', 'Хватит фапать бро', 'Что то пошло не так', 'Алеша попвич занят с телками, попробуй позже', 'Азиатки кончились']
 stikers = [
-	'CAADAwADDwMAAt0NBwl-2xGCWqBcTAI' # pesiy kek
+	'CAADAwADDwMAAt0NBwl-2xGCWqBcTAI', # pesiy kek
+	'CAADAgADTQADZ0g6CQa56P8cfBcjAg', #spanch bob
 ]
 
 @bot.message_handler(commands=['kek'])
@@ -61,7 +62,7 @@ def handle_start_help(message):
 @bot.message_handler(content_types=["text"])
 def repeat_all_messages(message):
 	if random.randint(0, 1) == 1:
-		bot.send_sticker(message.chat.id, stikers[random.randint(0, 0)])
+		bot.send_sticker(message.chat.id, stikers[random.randint(0, 1)])
 	else:
 	    bot.send_message(message.chat.id, reply[random.randint(0, 8)])
 
