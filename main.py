@@ -17,7 +17,8 @@ stikers = [
 	'CAADAgADRwYAAkxb1gn9h6PpAyEkggI', #optimus fuck
 	'CAADAgADngADk8vUCDsXkJ5Ka6VsAg',
 	'CAADAgADIwADTFvWCfkn7nruQyHoAg',
-	'CAADAgAD6gEAAsE8ngaA44zCtd3nBAI'
+	'CAADAgAD6gEAAsE8ngaA44zCtd3nBAI',
+	'CAADAgADTQADZ0g6CQa56P8cfBcjAg', #spanch bob
 ]
 
 @bot.message_handler(commands=['kek'])
