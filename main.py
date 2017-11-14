@@ -6,7 +6,7 @@ import urllib
 import json
 import datetime
 
-bot = telebot.TeleBot("288734206:AAEQkkuFVLorOVwSo8lGJI9mKYWHxbQSRMM")
+bot = telebot.TeleBot("119720842:AAG__-LvMk0r0TACTRypwn_Te8OTprKa8SI")
 time = int(datetime.datetime.now().strftime("%H"))
 
 keks = ['кек', 'кпек', 'КЕК', 'Кек', 'кееееееК', 'лол кек чебурек', 'ишак тебя метил', 'КПЕК']
