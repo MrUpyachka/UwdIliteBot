@@ -4,8 +4,10 @@ import telebot
 import random
 import urllib
 import json
+import datetime
 
-bot = telebot.TeleBot("119720842:AAG__-LvMk0r0TACTRypwn_Te8OTprKa8SI")
+bot = telebot.TeleBot("288734206:AAEQkkuFVLorOVwSo8lGJI9mKYWHxbQSRMM")
+time = int(datetime.datetime.now().strftime("%H"))
 
 keks = ['кек', 'кпек', 'КЕК', 'Кек', 'кееееееК', 'лол кек чебурек', 'ишак тебя метил', 'КПЕК']
 ornul = ['как мразь', 'как тварь', 'как пидор', 'как шлеха', 'как алеша попович', 'как стерва', 'как орало', 'как орк',
@@ -13,6 +15,7 @@ ornul = ['как мразь', 'как тварь', 'как пидор', 'как 
 reply = ['Вот ты мышь...', 'Уйди лофтер!', 'Ты надоел уже', 'Шо, дизайнер шоли?', 'Обкекался мразь', 'Тоби пизда',
          'Вали пидор', 'Соси писос', 'Член не дорос кукарекать']
 telki = ['Слишком много телок', 'Попробуй позже', 'Я отказываюсь выполнять твои команды']
+telki_ne_daut = ['Иди работай!', 'Телки только после работы', 'Ну не в рабочее время же!', 'Ты хочешь чтобы твои коллеги спалили тебя за телками? Я тоже нет', 'Кончится работа, начнутся телки!', 'Не в этот час', 'Трудовые будни, не до телок']
 error = ['Телок дудосят', 'Хватит фапать бро', 'Что то пошло не так', 'Алеша попвич занят с телками, попробуй позже',
          'Азиатки кончились']
 stikers = [
@@ -43,13 +46,16 @@ def sendInfo(message):
 
 @bot.message_handler(commands=['telki'])
 def handle_start_help(message):
-    try:
-        data = urllib.urlopen('http://api.oboobs.ru/noise/1/').read()
-        obj = json.loads(data)
-        for img in obj:
-            bot.send_photo(message.chat.id, 'http://media.oboobs.ru/noise/' + str(img['id']) + '.jpg')
-    except Exception:
-        bot.send_message(message.chat.id, error[random.randint(0, 4)])
+    if time < 9 or time >= 18:
+        try:
+            data = urllib.urlopen('http://api.oboobs.ru/noise/1/').read()
+            obj = json.loads(data)
+            for img in obj:
+                bot.send_photo(message.chat.id, 'http://media.oboobs.ru/noise/' + str(img['id']) + '.jpg')
+        except Exception:
+            bot.send_message(message.chat.id, error[random.randint(0, 4)])
+    else:
+        bot.send_message(message.chat.id, telki_ne_daut[random.randint(0, len(telki_ne_daut) - 1)])
 
 
 @bot.message_handler(content_types=["text"])
