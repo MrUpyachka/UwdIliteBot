@@ -46,7 +46,7 @@ def sendInfo(message):
 
 @bot.message_handler(commands=['telki'])
 def handle_start_help(message):
-    if time < 9 or time >= 18:
+    if time < 21 or time >= 6:
         try:
             data = urllib.urlopen('http://api.oboobs.ru/noise/1/').read()
             obj = json.loads(data)
